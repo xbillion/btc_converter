@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Bitcoin converter</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <style>
+         body {font-size:3.7em;    background-image: radial-gradient(#f4f4f4 2px, transparent 2px);
+         background-size: 15px 15px;
+         background-color: #ffffff;
+         }
+         #main {position: relative;display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         min-height: 80vh;}
+         #box {min-width:440px;border-radius:5px;padding:22px 10px 15px 10px;background:#fff;opacity: 0.8;border:1px solid rgba(9, 30, 66, 0.2);}
+         #box:hover{opacity:1;border:1px solid #999;}
+         #box:hover #left{border-right:1px solid #999;}
+         #left{float:left; min-width: 220px;outline:none;background: #fff;border:0px solid #ccc;border-right:1px solid rgba(9, 30, 66, 0.2);padding:0 20px;}
+         #right{float:right;min-width:200px;padding:0 20px;}
+         #btc,#usd{outline: none;cursor: pointer;}
+         #time{font-size:12pt;opacity:0.2;}
+      </style>
+   </head>
+   <body>
+      <div id="main">
+         <div id="box">
+            <div id="left">
+               <div id="btc" contenteditable="true" spellcheck="false">1</div>
+            </div>
+            <div id="right">
+               <div id="usd" contenteditable="true" spellcheck="false"></div>
+            </div>
+         </div>
+      </div>
+      <script>
+         $(document).ready(function() {
+         
+         	var mode = 'btc'
+           function calc_rate(from = 'btc') {
+         		$.ajax({
+         				url: 'https://blockchain.info/ticker',
+         				dataType: 'json',
+         				success: function(data) {
+         					if (from == 'btc') {
+         						btc = $('#btc').text()
+         						usd = (btc * data['USD']['last']).toFixed(2)
+         						usd = Intl.NumberFormat('en-US').format(usd).replaceAll(",", " ");
+         						$("#usd").text(usd);
+         
+         					} else {
+         						usd = $('#usd').text().replaceAll(" ", "")
+         						btc = (usd / data['USD']['last']).toFixed(6)
+         						$('#btc').text(btc);
+         					}
+         				}
+         			});
+           }
+         
+           calc_rate();
+         
+         	$('#btc').on('keydown paste', function(event) {
+         	  if($(this).text().length === 9 && event.keyCode != 8) { 
+         	    event.preventDefault();
+         	  }
+         	  calc_rate();
+         	});
+         
+         	$('#usd').on('keydown paste', function(event) {
+         		mode = 'usd'
+         	  calc_rate('usd');
+         	});
+         
+         setInterval(function(){
+             calc_rate(mode);
+         },60000);
+         
+         });
+      </script>
+   </body>
+</html>
