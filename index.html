@@ -4,22 +4,57 @@
       <title>Bitcoin converter</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <style>
-         body {font-size:3.7em;    background-image: radial-gradient(#f4f4f4 2px, transparent 2px);
-         background-size: 15px 15px;
-         background-color: #ffffff;
+         body {
+             font-size:3.7em;
+              background-image: radial-gradient(#f4f4f4 2px, transparent 2px);
+              background-size: 15px 15px;
+              background-color: #ffffff;
          }
-         #main {position: relative;display: flex;
-         justify-content: center;
-         align-items: center;
-         text-align: center;
-         min-height: 80vh;}
-         #box {min-width:440px;border-radius:5px;padding:22px 10px 15px 10px;background:#fff;opacity: 0.8;border:1px solid rgba(9, 30, 66, 0.2);}
-         #box:hover{opacity:1;border:1px solid #999;}
-         #box:hover #left{border-right:1px solid #999;}
-         #left{float:left; min-width: 220px;outline:none;background: #fff;border:0px solid #ccc;border-right:1px solid rgba(9, 30, 66, 0.2);padding:0 20px;}
-         #right{float:right;min-width:200px;padding:0 20px;}
-         #btc,#usd{outline: none;cursor: pointer;}
-         #time{font-size:12pt;opacity:0.2;}
+          #main {
+             position: relative;
+             display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              min-height: 80vh;
+         }
+          #box {
+             min-width:440px;
+             border-radius:5px;
+             padding:22px 10px 15px 10px;
+             background:#fff;
+             opacity: 0.8;
+             border:1px solid rgba(9, 30, 66, 0.2);
+         }
+          #box:hover{
+             opacity:1;
+             border:1px solid #999;
+         }
+          #box:hover #left{
+             border-right:1px solid #999;
+         }
+          #left{
+             float:left;
+              min-width: 220px;
+             outline:none;
+             background: #fff;
+             border:0px solid #ccc;
+             border-right:1px solid rgba(9, 30, 66, 0.2);
+             padding:0 20px;
+         }
+          #right{
+             float:right;
+             min-width:200px;
+             padding:0 20px;
+         }
+          #btc,#usd{
+             outline: none;
+             cursor: pointer;
+         }
+          #time{
+             font-size:12pt;
+             opacity:0.2;
+         }
       </style>
    </head>
    <body>
